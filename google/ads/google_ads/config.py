@@ -146,9 +146,9 @@ def load_from_dict(config_dict):
         A value error if the argument(config_dict) is not a dict
     """
     if isinstance(config_dict, dict):
-	return config_dict
+        return config_dict
     else:
-	raise ValueError('The configuration object passed to function(load_from_dict) must be of type dict')
+        raise ValueError('The configuration object passed to function(load_from_dict) must be of type dict')
 
 
 @_config_validation_decorator
