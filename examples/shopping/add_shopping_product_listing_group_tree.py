@@ -42,30 +42,30 @@ def main(client,customer_id, ad_group_id, should_replace_existing_tree):
     operations.append(operation)
 
 
-    # operation = create_listing_group_unit_biddable(client, customer_id, ad_group_id, ad_group_criterion_root_resource_name, \
-    #                                             'USED',100_000)
-    # operations.append(operation)
+    operation = create_listing_group_unit_biddable(client, customer_id, ad_group_id, ad_group_criterion_root_resource_name, \
+                                                'USED',100_000)
+    operations.append(operation)
 
-    operation = create_listing_group_subdivision(client, customer_id, ad_group_id, ad_group_criterion_root_resource_name )
+    operation, resource_name = create_listing_group_subdivision(client, customer_id, ad_group_id, ad_group_criterion_root_resource_name )
+    operations.append(operation)
+
+   
+    operation = create_listing_group_unit_biddable(client, customer_id, ad_group_id, resource_name, \
+                                                cpc_bid_micros = 900_000, brand= "CoolBrand")
     operations.append(operation)
 
 
-    # operation = create_listing_group_unit_biddable(client, customer_id, ad_group_id, ad_group_criterion_root_resource_name, \
-    #                                             cpc_bid_micros = 900_000, brand= "CoolBrand")
-    # operations.append(operation)
+
+    operation = create_listing_group_unit_biddable(client, customer_id, ad_group_id, resource_name, \
+                                                cpc_bid_micros = 10_000, brand= "CheapBrand")
+    operations.append(operation)
 
 
+    operation = create_listing_group_unit_biddable(client, customer_id, ad_group_id, resource_name, \
+                                                cpc_bid_micros = 50_000)
+    operations.append(operation)
 
-    # operation = create_listing_group_unit_biddable(client, customer_id, ad_group_id, ad_group_criterion_root_resource_name, \
-    #                                             cpc_bid_micros = 10_000, brand= "CheapBrand")
-    # operations.append(operation)
-
-
-    # operation = create_listing_group_unit_biddable(client, customer_id, ad_group_id, ad_group_criterion_root_resource_name, \
-    #                                             cpc_bid_micros = 50_000)
-    # operations.append(operation)
-
-    # total_count=0
+    total_count=0
 
 
     agc_service = client.get_service("AdGroupCriterionService")
@@ -105,12 +105,12 @@ def create_listing_group_unit_biddable(client, customer_id, ad_group_id, ad_grou
 
     if brand:
         criterion.listing_group.case_value.listing_brand.value.value = brand
-      
+    else:
+        pass      
     return operation
 
 
-def create_listing_group_subdivision(client, customer_id, ad_group_id, parent_ad_group_criterion_name=None, \
-                                     listing_dimension_info=None):
+def create_listing_group_subdivision(client, customer_id, ad_group_id, parent_ad_group_criterion_name=None):
 
     ad_group_service = client.get_service('AdGroupCriterionService')
     operation = client.get_type('AdGroupCriterionOperation')
@@ -121,12 +121,11 @@ def create_listing_group_subdivision(client, customer_id, ad_group_id, parent_ad
 
     listing_group = criterion.listing_group
     listing_group.type = client.get_type("ListingGroupTypeEnum").SUBDIVISION
-    if parent_ad_group_criterion_name and listing_dimension_info:
-        listing_group.parent_ad_group_criterion = parent_ad_group_criterion
-        listing_group_info.case_value = listing_dimension_info 
+    listing_group.parent_ad_group_criterion.value = parent_ad_group_criterion_name
+    listing_group.case_value.product_condition.condition = client.get_type("ProductConditionEnum").UNSPECIFIED
 
 
-    return operation
+    return operation, resource_name
 
 
 
