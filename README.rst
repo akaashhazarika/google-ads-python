@@ -3,6 +3,10 @@ Google Ads API Client Library for Python
 
 This project hosts the Python client library for the Google Ads API.
 
+Build Status
+------------
+|build-status|
+
 Features
 --------
 * Distributed via PyPI.
@@ -95,13 +99,15 @@ You can also retrieve it by exporting environment variables.
 
 * Required for OAuth2 Installed Application Flow
 
-.. code-block::bash
+.. code-block:: bash
 
   export GOOGLE_ADS_CLIENT_ID=INSERT_OAUTH2_CLIENT_ID_HERE
   export GOOGLE_ADS_CLIENT_SECRET=INSERT_OAUTH2_CLIENT_SECRET_HERE
   export GOOGLE_ADS_REFRESH_TOKEN=INSERT_REFRESH_TOKEN_HERE
 
 * Required for OAuth2 Service Account Flow:
+
+.. code-block:: bash
 
   export GOOGLE_ADS_PATH_TO_PRIVATE_KEY_FILE=INSERT_PRIVATE_KEY_PATH_HERE
   export GOOGLE_ADS_DELEGATED_ACCOUNT=INSERT_DELEGATED_ACCOUNT_HERE
@@ -230,6 +236,7 @@ Authors
 * `David Wihl`_
 * `Ben Karl`_
 
+.. |build-status| image:: https://storage.googleapis.com/gaa-clientlibs/badges/google-ads-python/buildstatus_ubuntu.png
 .. _Developer Site: https://developers.google.com/google-ads/api/docs/client-libs/python/
 .. _Installed Application Flow: https://developers.google.com/google-ads/api/docs/client-libs/python/oauth-installed
 .. _Web Application Flow: https://developers.google.com/google-ads/api/docs/client-libs/python/oauth-web

@@ -1,4 +1,4 @@
-# Copyright 2018 Google LLC
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,13 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-from __future__ import absolute_import
-
-
-import google.ads.google_ads.client
-import google.ads.google_ads.errors
-import google.ads.google_ads.util
-
-
-VERSION = '3.1.2'
+from .metadata_interceptor import MetadataInterceptor
+from .exception_interceptor import ExceptionInterceptor
+from .logging_interceptor import LoggingInterceptor
